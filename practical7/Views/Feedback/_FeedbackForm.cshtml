@@ -1,0 +1,57 @@
+﻿
+@model practical7.Models.Feedback
+
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+<h3>Student Feedback Form</h3>
+
+@using (Html.BeginForm("Index", "Feedback", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.StudentName)
+        @Html.TextBoxFor(m => m.StudentName,
+            new { @class = "form-control", placeholder = "Enter your name" })
+        @Html.ValidationMessageFor(m => m.StudentName,
+            "", new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email,
+            new { @class = "form-control", placeholder = "Enter your email" })
+        @Html.ValidationMessageFor(m => m.Email,
+            "", new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Rating)
+        @Html.DropDownListFor(m => m.Rating,
+            new List<SelectListItem>
+            {
+                new SelectListItem { Text = "1 Star", Value = "1" },
+                new SelectListItem { Text = "2 Stars", Value = "2" },
+                new SelectListItem { Text = "3 Stars", Value = "3" },
+                new SelectListItem { Text = "4 Stars", Value = "4" },
+                new SelectListItem { Text = "5 Stars", Value = "5" }
+            },
+            "Select Rating",
+            new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Rating,
+            "", new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Comments)
+        @Html.TextAreaFor(m => m.Comments,
+            new { @class = "form-control", rows = "4",
+                  placeholder = "Write your feedback" })
+        @Html.ValidationMessageFor(m => m.Comments,
+            "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Submit Feedback
+    </button>
+}

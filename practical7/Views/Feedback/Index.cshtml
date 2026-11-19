@@ -1,0 +1,52 @@
+﻿@model List<practical7.Models.Feedback>
+
+@{
+    ViewData["Title"] = "Feedback Management";
+}
+
+<div class="container mt-4">
+
+    <h2 class="text-center mb-4">
+        Feedback Management System
+    </h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Message"]
+        </div>
+    }
+
+    <div class="card shadow p-4 mb-4">
+        @await Html.PartialAsync(
+        "_FeedbackForm",
+                new practical7.Models.Feedback()
+                )
+    </div>
+
+    <h3>Submitted Feedback</h3>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Email</th>
+                <th>Rating</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.StudentName</td>
+                    <td>@item.Email</td>
+                    <td>@item.Rating / 5</td>
+                    <td>@item.Comments</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
